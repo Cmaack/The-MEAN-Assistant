@@ -1,41 +1,70 @@
 <!doctype html>
-<html>
-<head>
-    <title>Node Authentication</title>
+<html ng-app="AppointmentApp">
+  <head>
+    <title>MEAN Assistant</title>
 
-    <link rel="stylesheet" href="/styles.css" media="screen" title="no title" charset="utf-8">
+      <link rel="stylesheet" href="/styles.css" media="screen" title="no title" charset="utf-8">
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js" charset="utf-8"></script>
+      <script src="/js/controllers/appointments_controller.js" charset="utf-8"></script>
+      <script src="/app.js" charset="utf-8"></script>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-
-</head>
-<body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1><span class="fa fa-user"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
-    </div>
-
-    <div class="row">
-
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-            </div>
+  </head>
+  <body>
+    <section ng-controller="appointments_controller">
+     <!--=======================================================================
+        ****************  PROFILE VIEW  ************************************
+     ========================================================================-->
+      <div class="container">
+        <!-- header -->
+        <div class="page-header text-center">
+          <h1><span class="fa fa-user"></span> Profile Page</h1>
+          <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
         </div>
+          <!-- profile body -->
 
+          <form ng-submit="newAppointment" class="form-horizontal" action="index.html" method="post">
+            <div class="form-group">
+                <label for="appointment-title" class="col-sm-2 control-label">Appointment Title/Type</label>
+              <div class="col-sm-10">
+                <input ng-model="newAppointment.type_name" type="text" class="form-control" id="appointment-title" placeholder="New Appointment">
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="appointment-location" class="col-sm-2 control-label">Location</label>
+              <div class="col-sm-10">
+                <input ng-model="newAppointment.location" type="text" class="form-control" id="appointment-location" placeholder="Address, City, State ">
+              </div>
+            </div>
+          </form>
+
+      </div>
+
+    </section>
+
+
+  </body>
+</html>
+
+
+
+
+<!-- <div class="row"> -->
+
+    <!-- LOCAL INFORMATION -->
+    <!-- <div class="col-sm-6">
+        <div class="well">
+            <h3><span class="fa fa-user"></span> Local</h3>
+
+                <p>
+                    <strong>id</strong>: <%= user._id %><br>
+                    <strong>email</strong>: <%= user.local.email %><br>
+                    <strong>password</strong>: <%= user.local.password %>
+                </p>
+
+        </div>
     </div>
 
-</div>
-</body>
-</html>
+</div> -->

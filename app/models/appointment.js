@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 
 
 var appointmentSchema = mongoose.Schema({
-  name:        { type: String, required: true },
-  date:        { type: Date },
-  time:        { type: Date },
-  location:    {type: String},
-  description: {type: Text}
+  type_name:        { type:  String, required: true },
+  date:        { type:  Date },
+  time:        { type:  Date },
+  location:    { type:  String },
+  description: { type:  String }
 
 }, { timestamps: true });
 
