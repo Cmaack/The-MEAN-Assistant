@@ -1,4 +1,4 @@
-var app = angular.module('AppointmentApp');
+var app = angular.module('appointmentApp', [ 'ngAnimate', 'ui.bootstrap', 'ngRoute']);
 
 app.controller('AppointmentsController', ['$scope', '$http', function ($scope, $http){
 

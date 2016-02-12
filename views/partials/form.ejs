@@ -1,0 +1,68 @@
+
+
+
+<div class="container">
+  <!-- header -->
+  <div class="page-header text-center">
+    <h1><span class="fa fa-user"></span> Welcome <strong>id</strong> <%= user._id %><br> </h1>
+    <h2>Here's what your day is lookin' like...</h2>
+    <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+  </div>
+    <!-- profile body -->
+
+    <form ng-submit="newAppointment" class="form-horizontal" action="index.html" method="post">
+      <!-- title  -->
+      <div class="form-group">
+          <label for="appointment-title" class="col-sm-2 control-label">Appointment Title/Type</label>
+        <div class="col-sm-10">
+          <input ng-model="newAppointment.type_name" type="text" class="form-control" id="appointment-title" placeholder="New Appointment">
+        </div>
+      </div>
+      <!-- date -->
+      <h4>Popup</h4>
+      <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cjm">Date</label>
+              <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="newAppointment.date" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" id="cjm" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+
+    <!--<div class="col-md-6">-->
+    <!--    <p class="input-group">-->
+    <!--      <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />-->
+    <!--      <span class="input-group-btn">-->
+    <!--        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>-->
+    <!--      </span>-->
+    <!--    </p>-->
+    <!--</div>-->
+</div>
+      <!-- <div class="form-group">
+          <label for="appointment-date" class="col-sm-2 control-label">Date</label>
+        <div class="col-sm-10">
+          <input ng-model="newAppointment.date" type="text" class="form-control" id="appointment-date" placeholder="MM/dd/yyyy">
+        </div>
+      </div> -->
+      <!-- time -->
+      <div class="form-group">
+          <label for="appointment-time" class="col-sm-2 control-label">Time</label>
+        <div class="col-sm-10">
+          <input ng-model="newAppointment.time" type="text" class="form-control" id="appointment-time" placeholder="Address, City, State ">
+        </div>
+      </div>
+      <!-- location -->
+      <div class="form-group">
+          <label for="appointment-location" class="col-sm-2 control-label">Location</label>
+        <div class="col-sm-10">
+          <input ng-model="newAppointment.location" type="text" class="form-control" id="appointment-location" placeholder="Address, City, State ">
+        </div>
+      </div>
+
+    </form>
+
+</div>

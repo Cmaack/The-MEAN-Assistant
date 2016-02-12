@@ -1,36 +1,96 @@
-var app = angular.module('appointmentApp', ['ui.bootstrap']);
+var app = angular.module('appointmentApp', [ 'ngAnimate', 'ui.bootstrap', 'ui.bootstrap.datetimepicker']);
 
-// define factory for data source
-app.factory("Types", function(){
-  var types = ["Breakfast", "Brunch", "Lunch", "Dinner", "Coffee", "Drinks", "Tea",
-  "Baseball Game", "Basketball Game", "Hockey Game", "Football Game", "Football Match",
-  "Soccer Game", "Tennis Match", "Golf Outing", "Billards", "Squash", "Raquet Ball" "Bowling",
-  "Doctor", "Dentist", "Lecture", "Class","Concert", "Show","Play", "Picnic", "Hackathon", "Pick up",
-  "Departure", "Interview", "Phone Interview", "Video Conference","Arrival","Drop off",
-  "Board Meeting","Brainstorming Meeting", "Breakout Meeting", "Combination Meeting", "Conference Call",
-  "Event Planning Meeting", "Feedback Meeting", "Evaluation Meeting", "Emergency Meeting",
-  "Financial Review Meeting", "Financial Update Meeting",
-  "First Meeting", "Holiday Meeting", "Information Sharing Meeting", "Introduction Meeting",
-  "Investor Meeting", "Keynote Speeche", "Large Conference Meeting", "Leadership Meeting",
-  "Management Meeting", "Manager Meeting", "Meetings to Plan Bigger Meeting",
-  "New Business Pitch Meeting", "New Product Launch Meeting", "Online Meeting", "Organizational Meeting",
-  "Party Meeting", "Pitch Meeting", "Planning Meeting", "Political Meeting",
-  "Problem-Solving Meetings", "Production Meetings", "Project Planning Meetings", "Religious Meetings",
-  "Research Review Meetings", "Sales Meetings", "Shareholder Meetings", "Small Conference Meetings",
-  "Staff Meetings", "Stakeholder Meetings","Strategy Meetings", "Termination Meetings", "Training Session Meetings",
-  "Trip Planning Meetings", "Update Meetings", "Year End Meetings", "Year Beginning Meetings", "Family Meetings",
-  "School Meetings", "Class Meetings", "Public Relations Meetings", "Sports Meetings (and Events)", "Team Meetings"
-  ];
+// =====================Appointments Controller ============================//
+app.controller('AppointmentsController', ['$scope', '$http', function ($scope, $http){
 
-  return types;
+  $http.get('/api/appointments').then(function(response){
+      var data = response.data;
+      $scope.appointments = data.appointments;
 
-});
+    });
 
-// setup controller and pass data source
-app.controller("TypeaheadCtrl", function($scope, Types) {
+    $scope.newAppointment = [];
+      $scope.createAppointment = function(){
+        $http.post('/api/appointments', {appointment: $scope.newAppointment}).then(function(response){
+          var data = response.data;
+          $scope.appointments.push( data );
+          $scope.newAppointment ={};
+        });
+      };
 
-	$scope.selected = undefined;
+      $scope.deleteAppointment = function(index) {
 
-	$scope.types = Types;
+          var appointment = $scope.appointments[index];
+          $http.delete('/api/appointments/' + appointment.id);
+          $scope.appointments.splice(index, 1);
+        };
 
+
+}]);
+
+
+
+// =====================DateTimePicker Controller ============================//
+app.controller('DateTimePickerDemoCtrl',
+function ($scope, $timeout) {
+  $scope.dateTimeNow = function() {
+    $scope.date = new Date();
+  };
+  $scope.dateTimeNow();
+
+  $scope.toggleMinDate = function() {
+    var minDate = new Date();
+    // set to yesterday
+    minDate.setDate(minDate.getDate() - 1);
+    $scope.minDate = $scope.minDate ? null : minDate;
+  };
+
+  $scope.toggleMinDate();
+
+  $scope.dateOptions = {
+    showWeeks: false
+  };
+  app.factory('utils',function(){
+    return {
+      remove:function(array,value){
+    		var index = array.indexOf(value);
+    		array.splice(index, 1);
+        return array;
+      }
+    };
+  });
+
+  // Disable weekend selection
+  $scope.disabled = function(calendarDate, mode) {
+    return mode === 'day' && ( calendarDate.getDay() === 0 || calendarDate.getDay() === 6 );
+  };
+
+  $scope.open = function($event,opened) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.dateOpened = true;
+    console.log('opened');
+  };
+
+  $scope.dateOpened = false;
+  $scope.hourStep = 1;
+  $scope.minuteStep = 1;
+
+  $scope.timeOptions = {
+    hourStep: [1, 2, 3],
+    minuteStep: [1, 5, 10, 15, 25, 30]
+  };
+
+  $scope.showMeridian = true;
+  $scope.timeToggleMode = function() {
+    $scope.showMeridian = !$scope.showMeridian;
+  };
+
+  $scope.$watch("date", function(date) {
+    // read date value
+  }, true);
+
+  $scope.resetHours = function() {
+    $scope.date.setHours(1);
+  };
 });
