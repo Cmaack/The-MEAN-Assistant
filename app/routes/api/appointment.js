@@ -12,7 +12,14 @@ router.get('/', function(req, res){
 
 router.post('/', function(req, res){
    var newAppointment= new Appointment(req.body.appointment);
-   newAppointment.save(function(err, dbAppointment){;
+
+   console.log(req.body.appointment, newAppointment, "APPOINTMENT PAYLOAD");
+
+
+
+
+   newAppointment.save(function(err, dbAppointment){
+     console.log(err, dbAppointment);
      res.json({appointment: dbAppointment})
    });
  });

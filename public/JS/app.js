@@ -6,26 +6,24 @@ app.controller('AppointmentsController', ['$scope', '$http', function ($scope, $
   $http.get('/api/appointments').then(function(response){
       var data = response.data;
       $scope.appointments = data.appointments;
-
     });
 
-    $scope.newAppointment = [];
+    $scope.newAppointment = {};
       $scope.createAppointment = function(){
+
+        console.log($scope.newAppointment);
         $http.post('/api/appointments', {appointment: $scope.newAppointment}).then(function(response){
-          var data = response.data;
+          var data = response.data.appointment;
           $scope.appointments.push( data );
-          $scope.newAppointment ={};
+          $scope.newAppointment = {};
         });
       };
 
       $scope.deleteAppointment = function(index) {
-
           var appointment = $scope.appointments[index];
-          $http.delete('/api/appointments/' + appointment.id);
+          $http.delete('/api/appointments/' + appointment._id);
           $scope.appointments.splice(index, 1);
         };
-
-
 }]);
 
 
