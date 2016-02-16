@@ -1,4 +1,5 @@
 body{
+  background-color: lightblue;
   padding-top:80px;
 }
 #datetimepicker{
@@ -13,11 +14,7 @@ body{
   padding-left: 32px;
   padding-right: 32px;
 }
-/*#dtp-label{
-  padding-top: 30px;
-    padding-left: 13.5%;
-  /*padding-left: 155px;
-}*/
+
 #user-welcome{
   margin-top: -40px;
   padding: 10px;

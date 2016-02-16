@@ -26,8 +26,6 @@ app.controller('AppointmentsController', ['$scope', '$http', function ($scope, $
         };
 }]);
 
-
-
 // =====================DateTimePicker Controller ============================//
 app.controller('DateTimePickerDemoCtrl',
 function ($scope, $timeout) {
