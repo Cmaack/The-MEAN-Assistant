@@ -17,6 +17,7 @@
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-animate.js" charset="utf-8"></script>
       <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+      <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.1.2.js"></script>
 
 
       <!-- JS custom -->
@@ -33,14 +34,23 @@
       -->
 
 
-      <section ng-controller="AppointmentsController" class="container">
+      <section ng-controller="AppointmentsController" >
         <!-- header -->
         <div class="page-header text-center" id="user-welcome">
           <h1><span class="fa fa-user"></span> Welcome  <%= user.local.email %><br> </h1>
 
           <a href="/logout" class="btn btn-warning btn-sm">Logout</a>
         </div>
+        <div >
 
+
+        <div ng-controller="AccordionDemoCtrl" class="container">
+
+        <uib-accordion close-others="oneAtATime">
+            <uib-accordion-group is-open="status.open">
+              <uib-accordion-heading>
+                <i class="fa fa-plus"></i> New Appointment <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+              </uib-accordion-heading>
 
 
         <!--
@@ -106,7 +116,9 @@
                 <!-- <pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre> -->
               </form>
             </div>
-
+          </uib-accordion-group>
+          </uib-accordion>
+          </div>
         <!--
          =====================================================================================
          ********************************** END FORM   ***************************************
@@ -126,8 +138,8 @@
 
               <ul>
                 <li>
-                  <p><strong>{{ appointment.type_name }}</strong></p>
-                  <p> {{ appointment.datetime | date:'medium' }} </p>
+                  <h3><strong>{{ appointment.type_name }}</strong></h3>
+                  <h5> {{ appointment.datetime | date:'medium' }} </h5>
                   <p>
                     {{ appointment.location }}
                   </p>
@@ -145,27 +157,7 @@
       </div><!-- end appointments controller -->
 
 
+    </div>
 </section>
   </body>
 </html>
-
-
-
-
-<!-- <div class="row"> -->
-
-    <!-- LOCAL INFORMATION -->
-    <!-- <div class="col-sm-6">
-        <div class="well">
-            <h3><span class="fa fa-user"></span> Local</h3>
-
-                <p>
-                    <strong>id</strong>: <%= user._id %><br>
-                    <strong>email</strong>: <%= user.local.email %><br>
-                    <strong>password</strong>: <%= user.local.password %>
-                </p>
-
-        </div>
-    </div>
-
-</div> -->
